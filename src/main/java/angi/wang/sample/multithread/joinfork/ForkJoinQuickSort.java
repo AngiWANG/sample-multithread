@@ -1,5 +1,8 @@
 package angi.wang.sample.multithread.joinfork;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.concurrent.RecursiveAction;
 
@@ -10,6 +13,9 @@ import java.util.concurrent.RecursiveAction;
  * @author angi
  */
 public class ForkJoinQuickSort<T extends Comparable> extends RecursiveAction {
+
+    static Logger logger = LoggerFactory.getLogger(ForkJoinQuickSort.class);
+
     /**
      * 待排序的数据
      */
@@ -40,6 +46,7 @@ public class ForkJoinQuickSort<T extends Comparable> extends RecursiveAction {
         if (left < right) {
             // 取中间索引
             int pivotIndex = left + ((right - left) / 2);
+            logger.info("pivotIndex: " + pivotIndex);
             pivotIndex = partition(pivotIndex);
             // 并行递归
             invokeAll(new ForkJoinQuickSort(data, left, pivotIndex -

@@ -1,5 +1,8 @@
 package angi.wang.sample.multithread.joinfork;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.RecursiveTask;
 
 /**
@@ -9,6 +12,7 @@ import java.util.concurrent.RecursiveTask;
  */
 public class ForkJoinSum
         extends RecursiveTask<Integer> {
+    static Logger logger = LoggerFactory.getLogger(ForkJoinSum.class);
     private final int start;
     private final int end;
     private final static int THRESHOLD = 5;
@@ -39,6 +43,7 @@ public class ForkJoinSum
                     (leftCalculator.join() +
                             rightCalculator.join());
         }
+        logger.info("result: " + result);
         return result;
     }
 }
